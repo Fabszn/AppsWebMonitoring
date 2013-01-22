@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AppsWebMonitoring</title>
+
+    <style>
+
+        body {
+            background-color: #F9FFFC;
+        }
+
+        .webapp {
+            width: 100%;
+            height: 70px;
+            border: 5px solid #444;
+            margin-bottom: 17px;
+            -webkit-border-radius: 20px;
+            -moz-border-radius: 20px;
+            border-radius: 20px;
+            background-color: #B2BEB5;
+
+        }
+
+        .error {
+            box-shadow: 0 0 18px #960018;
+        }
+
+        .ok {
+            box-shadow: 0 0 18px #00925A;
+        }
+
+        .info-name {
+            font-size: 60px;
+            font-family: arial;
+            font-weight: 900;
+            color: #444;
+        }
+
+        .info-url {
+
+            font-size: 23px;
+            font-family: arial;
+            font-weight: bold;
+            color: #444;
+
+        }
+
+    </style>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css">
+
+
+</head>
+<body>
+
+<div id="container">
+
+
+</div>
+
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/ui/1.9.2/jquery-ui.min.js"></script>
+
+
+<script>
+
+    $(function () {
+
+        setInterval(function () {
+
+            $('.webapp').each(function () {
+
+                key = $(this).attr('id')
+
+                $.ajax('/check?key=' + key).done(function (data) {
+                    i = data.split('_');
+                    console.debug(i[0] + ' ' + i[1]);
+                    if (i[0] == "OK") {
+                        $('#' + i[1]).removeClass('error').addClass('ok');
+                    } else {
+                        $('#' + i[1]).removeClass('ok').addClass('error');
+                    }
+                }).fail(function () {
+                            // alert('server is down!')
+                        });
+
+            })
+
+
+        }, 5000);
+
+        $.ajax('/allItems').done(function (data) {
+            $(data).each(function (idx, value) {
+                $('<div class="webapp" id="' + value['key'] + '"> <span class="info-name">' + value['name'] + '</span><span class="info-url">' + value['url'] + '</span></div>').appendTo('#container');
+            });
+
+            $('.info-name').each(function () {
+                $(this).position({
+                    my: "center",
+                    at: "center",
+                    of: $(this).parent()
+                })
+            });
+            $('.info-url').each(function () {
+                $(this).position({
+                    my: "right bottom",
+                    at: "right-10 bottom-10",
+                    of: $(this).parent()
+                })
+            });
+        });
+
+
+    })
+
+</script>
+
+</body>
+
+
+</html>
