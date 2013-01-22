@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>AppsWebMonitoring</title>
+    <title>com.app.web.monitoring.AppsWebMonitoring</title>
 
     <style>
 
@@ -73,7 +73,7 @@
                 key = $(this).attr('id')
 
                 $.ajax('/check?key=' + key).done(function (data) {
-                    i = data.split('_');
+                    i = data.split('-');
                     console.debug(i[0] + ' ' + i[1]);
                     if (i[0] == "OK") {
                         $('#' + i[1]).removeClass('error').addClass('ok');

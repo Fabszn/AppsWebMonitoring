@@ -2,6 +2,7 @@ package com.app.web.monitoring;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
+import com.google.common.base.Predicate;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.FluentIterable;
@@ -44,8 +45,17 @@ public class AppMonitoring {
         try {
             conf.load(AppMonitoring.class.getClassLoader().getResourceAsStream("conf.properties"));
 
-            for (int i = 1; i <= Integer.valueOf(conf.getProperty("web.app.number")); i++) {
-                final String key = PREFIX_PROPERTIES + i;
+
+            final Collection<Object> webApps = Collections2.filter(conf.keySet(), new Predicate<Object>() {
+                public boolean apply(Object o) {
+                    final String currentKey = (String) o;
+                    return currentKey.startsWith(AppMonitoredConstant.WEBAPP);
+                }
+            });
+
+            for (Object o : webApps) {
+
+                final String key = (String)o;
                 String v = conf.getProperty(key);
                 String[] vs = v.split(";");
                 appMonitoreds.put(key, new AppMonitored(key, vs[1], vs[0]));
@@ -112,8 +122,6 @@ public class AppMonitoring {
                 httpExchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
 
 
-
-
                 final OutputStream o = httpExchange.getResponseBody();
                 o.write("OK".getBytes());
                 o.close();
@@ -145,7 +153,7 @@ public class AppMonitoring {
                 httpExchange.sendResponseHeaders(HTTP_OK, 0);
                 final OutputStream o = httpExchange.getResponseBody();
 
-                o.write((result + "_" + current.getKey()).getBytes());
+                o.write((result + "-" + current.getKey()).getBytes());
                 o.close();
             }
         });

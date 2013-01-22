@@ -12,4 +12,5 @@ public class AppMonitoredConstant {
     final static String PARAMS_KEY = "PARAMS";
     public static final String GET = "GET";
     public static final String URL_KEY = "key";
+    public static final String WEBAPP = "webapp";
 }
