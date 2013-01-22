@@ -1,4 +1,4 @@
-package AppsWebMonitoring;
+package com.app.web.monitoring;
 
 /**
  * .

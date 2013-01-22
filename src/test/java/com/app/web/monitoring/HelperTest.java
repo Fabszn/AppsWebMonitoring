@@ -1,9 +1,9 @@
-package AppsWebMonitoring;
+package com.app.web.monitoring;
 
 import static org.fest.assertions.api.Assertions.*;
-import org.junit.Test;
 
-import java.net.UnknownHostException;
+import com.app.web.monitoring.Helper;
+import org.junit.Test;
 
 /**
  * .

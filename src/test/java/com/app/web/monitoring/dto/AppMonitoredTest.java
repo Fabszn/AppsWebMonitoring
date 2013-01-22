@@ -1,4 +1,4 @@
-package dto;
+package com.app.web.monitoring.dto;
 
 
 

@@ -1,4 +1,4 @@
-package AppsWebMonitoring;
+package com.app.web.monitoring;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
@@ -7,7 +7,7 @@ import com.google.common.collect.Collections2;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Maps;
 import com.sun.net.httpserver.*;
-import dto.AppMonitored;
+import com.app.web.monitoring.dto.AppMonitored;
 
 import java.io.IOException;
 import java.io.OutputStream;

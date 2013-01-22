@@ -1,6 +1,5 @@
-package AppsWebMonitoring;
+package com.app.web.monitoring;
 
-import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
 
 import java.io.BufferedInputStream;
