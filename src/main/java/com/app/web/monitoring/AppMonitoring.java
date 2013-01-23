@@ -43,7 +43,8 @@ public class AppMonitoring {
     private static void loadconfiguration() {
         //loading configuration
         try {
-            conf.load(AppMonitoring.class.getClassLoader().getResourceAsStream("conf.properties"));
+
+            conf.load(AppMonitoring.class.getClassLoader().getResourceAsStream("conf/conf.properties"));
 
 
             final Collection<Object> webApps = Collections2.filter(conf.keySet(), new Predicate<Object>() {
@@ -84,7 +85,7 @@ public class AppMonitoring {
                     exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
 
                     OutputStream responseBody = exchange.getResponseBody();
-                    responseBody.write(Helper.loadFile("AppsWebMonitoring.html"));
+                    responseBody.write(Helper.loadFile("web/AppsWebMonitoring.html"));
                     responseBody.close();
                 }
             }

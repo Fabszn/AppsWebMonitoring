@@ -2,10 +2,7 @@ package com.app.web.monitoring;
 
 import com.google.common.base.Preconditions;
 
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -24,17 +21,13 @@ public class Helper {
 
         Preconditions.checkNotNull(path);
 
-        FileInputStream fis = null;
+        InputStream fis = null;
         try {
 
-            final URL url = AppMonitoring.class.getClassLoader().getResource(path);
+            fis = AppMonitoring.class.getClassLoader().getResourceAsStream(path);
 
-            File file;
-            file = new File(url.toURI());
-
-            byte[] byteArray = new byte[(int) file.length()];
-            fis = new FileInputStream(file);
             BufferedInputStream bis = new BufferedInputStream(fis);
+            byte[] byteArray = new byte[1024];
             bis.read(byteArray, 0, byteArray.length);
             return byteArray;
 
