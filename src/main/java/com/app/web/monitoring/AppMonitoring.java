@@ -10,6 +10,8 @@ import com.google.common.collect.Maps;
 import com.sun.net.httpserver.*;
 import com.app.web.monitoring.dto.AppMonitored;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
@@ -32,10 +34,17 @@ public class AppMonitoring {
     private static final String CHECK = "check";
     private static Map<String, AppMonitored> appMonitoreds = Maps.newHashMap();
 
-    private static final String PREFIX_PROPERTIES = "webapp";
+    private static String pathConf;
+    private static String pathWebFile;
 
 
     public static void main(String[] args) throws IOException {
+        System.out.println(System.getProperty("user.dir"));
+        System.out.println(args[0]);
+        pathConf = System.getProperty("user.dir")+"/"+args[0];
+        System.out.println(args[1]);
+        pathWebFile = System.getProperty("user.dir")+"/"+args[1];
+
         loadconfiguration();
         launchServer();
     }
@@ -44,7 +53,7 @@ public class AppMonitoring {
         //loading configuration
         try {
 
-            conf.load(AppMonitoring.class.getClassLoader().getResourceAsStream("conf/conf.properties"));
+            conf.load(new FileInputStream(new File(pathConf)));
 
 
             final Collection<Object> webApps = Collections2.filter(conf.keySet(), new Predicate<Object>() {
@@ -56,9 +65,10 @@ public class AppMonitoring {
 
             for (Object o : webApps) {
 
-                final String key = (String)o;
+                final String key = (String) o;
                 String v = conf.getProperty(key);
                 String[] vs = v.split(";");
+
                 appMonitoreds.put(key, new AppMonitored(key, vs[1], vs[0]));
             }
 
@@ -85,7 +95,7 @@ public class AppMonitoring {
                     exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
 
                     OutputStream responseBody = exchange.getResponseBody();
-                    responseBody.write(Helper.loadFile("web/AppsWebMonitoring.html"));
+                    responseBody.write(Helper.loadFile(pathWebFile));
                     responseBody.close();
                 }
             }
@@ -115,24 +125,6 @@ public class AppMonitoring {
 
 
         });
-        server.createContext("/toto", new HttpHandler() {
-            public void handle(HttpExchange httpExchange) throws IOException {
-
-                Headers responseHeaders = httpExchange.getResponseHeaders();
-                responseHeaders.set("Content-Type", "text/json");
-                httpExchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
-
-
-                final OutputStream o = httpExchange.getResponseBody();
-                o.write("OK".getBytes());
-                o.close();
-
-
-            }
-
-
-        });
-
 
         HttpContext ctx = server.createContext("/" + CHECK, new HttpHandler() {
             public void handle(HttpExchange httpExchange) throws IOException {

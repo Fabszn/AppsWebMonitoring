@@ -15,19 +15,17 @@ import java.net.URL;
 public class Helper {
 
 
-    private static final String GET = "GET";
-
     public static byte[] loadFile(final String path) {
 
         Preconditions.checkNotNull(path);
 
         InputStream fis = null;
         try {
-
-            fis = AppMonitoring.class.getClassLoader().getResourceAsStream(path);
+            System.out.println(path);
+            fis = new FileInputStream(path);
 
             BufferedInputStream bis = new BufferedInputStream(fis);
-            byte[] byteArray = new byte[1024];
+            byte[] byteArray = new byte[5121];
             bis.read(byteArray, 0, byteArray.length);
             return byteArray;
 

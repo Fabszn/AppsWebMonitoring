@@ -5,6 +5,8 @@ import static org.fest.assertions.api.Assertions.*;
 import com.app.web.monitoring.Helper;
 import org.junit.Test;
 
+import java.net.URL;
+
 /**
  * .
  *
@@ -16,7 +18,9 @@ public class HelperTest {
     @Test
     public void testLoadFile() throws Exception {
 
-        final byte[] f = Helper.loadFile("fileTest.txt");
+
+        URL url = Helper.class.getClassLoader().getResource("fileTest.txt");
+        final byte[] f = Helper.loadFile(url.getPath());
 
         assertThat(f).isNotEmpty();
 
@@ -39,8 +43,6 @@ public class HelperTest {
     public void testHttpQueryUnvalidRL() throws Exception {
         assertThat(Helper.httpQuery("http://blog.toto")).isFalse();
     }
-
-
 
 
 }

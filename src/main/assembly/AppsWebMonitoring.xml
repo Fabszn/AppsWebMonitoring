@@ -23,14 +23,21 @@
             </includes>
         </fileSet>
         <fileSet>
-            <directory>${project.build.directory}/classes/web</directory>
+            <directory>${project.basedir}/src/main/assembly/resources/web</directory>
             <outputDirectory>web</outputDirectory>
             <includes>
                 <include>*.html</include>
             </includes>
         </fileSet>
         <fileSet>
-            <directory>${project.build.directory}/classes/conf</directory>
+            <directory>${project.basedir}/src/main/assembly/resources/bin</directory>
+            <outputDirectory>bin</outputDirectory>
+            <includes>
+                <include>*.sh</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>${project.basedir}/src/main/assembly/resources/conf</directory>
             <outputDirectory>conf</outputDirectory>
             <includes>
                 <include>*.properties</include>
