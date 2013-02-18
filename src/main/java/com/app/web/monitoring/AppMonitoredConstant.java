@@ -1,10 +1,9 @@
 package com.app.web.monitoring;
 
+
 /**
- * .
- *
- * @author fsznajderman
- *         date :  20/01/13
+ * .@author fsznajderman
+ *         date :  17/01/13
  */
 public class AppMonitoredConstant {
 

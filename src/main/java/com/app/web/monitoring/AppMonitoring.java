@@ -23,7 +23,8 @@ import java.util.concurrent.Executors;
 import static java.net.HttpURLConnection.*;
 
 /**
- *
+ * .@author fsznajderman
+ *         date :  17/01/13
  */
 public class AppMonitoring {
 
@@ -39,14 +40,15 @@ public class AppMonitoring {
 
 
     public static void main(String[] args) throws IOException {
+        System.out.println("Start setup...");
         System.out.println(System.getProperty("user.dir"));
-        System.out.println(args[0]);
         pathConf = System.getProperty("user.dir")+"/"+args[0];
-        System.out.println(args[1]);
         pathWebFile = System.getProperty("user.dir")+"/"+args[1];
 
         loadconfiguration();
+        System.out.println("... setup finished");
         launchServer();
+        System.out.println("server started, listen on port : " + conf.getProperty(PORT));
     }
 
     private static void loadconfiguration() {

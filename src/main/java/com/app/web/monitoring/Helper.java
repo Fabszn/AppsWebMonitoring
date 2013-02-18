@@ -6,10 +6,9 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+
 /**
- * .
- *
- * @author fsznajderman
+ * .@author fsznajderman
  *         date :  17/01/13
  */
 public class Helper {

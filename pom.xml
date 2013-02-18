@@ -44,22 +44,30 @@
                     <descriptors>
                         <descriptor>src/main/assembly/AppsWebMonitoring.xml</descriptor>
                     </descriptors>
+                    <finalName>AppsWebMonitoring</finalName>
+                    <outputDirectory>dist</outputDirectory>
+                    <appendAssemblyId>false</appendAssemblyId>
                 </configuration>
             </plugin>
             <plugin>
-               <!-- Build an executable JAR -->
-               <groupId>org.apache.maven.plugins</groupId>
-               <artifactId>maven-jar-plugin</artifactId>
-               <configuration>
-               <archive>
-                 <manifest>
-                 <addClasspath>true</addClasspath>
-                 <classpathPrefix>lib/</classpathPrefix>
-                     <mainClass>com.app.web.monitoring.AppMonitoring</mainClass>
-                 </manifest>
-               </archive>
+                <!-- Build an executable JAR -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>lib/</classpathPrefix>
+                            <mainClass>com.app.web.monitoring.AppMonitoring</mainClass>
+                        </manifest>
+                    </archive>
                 </configuration>
-               </plugin>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.4</version>
+            </plugin>
         </plugins>
     </build>
 </project>

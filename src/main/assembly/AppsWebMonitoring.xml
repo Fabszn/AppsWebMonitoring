@@ -4,6 +4,7 @@
     <id>AppsWebMonitoring</id>
     <formats>
         <format>tar.gz</format>
+        <format>zip</format>
     </formats>
     <fileSets>
         <fileSet>
