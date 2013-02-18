@@ -4,7 +4,7 @@
 
     <groupId>AppsWebMonitoring</groupId>
     <artifactId>AppsWebMonitoring</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0-final</version>
     <packaging>jar</packaging>
 
     <name>com.app.web.monitoring.AppsWebMonitoring</name>
@@ -44,9 +44,10 @@
                     <descriptors>
                         <descriptor>src/main/assembly/AppsWebMonitoring.xml</descriptor>
                     </descriptors>
-                    <finalName>AppsWebMonitoring</finalName>
+                    <finalName>AppsWebMonitoring-${version}</finalName>
                     <outputDirectory>dist</outputDirectory>
                     <appendAssemblyId>false</appendAssemblyId>
+
                 </configuration>
             </plugin>
             <plugin>
